@@ -286,7 +286,18 @@ Deletes an expense. Verifies ownership.
 *(Add screenshots of your application here)*
 
 - **Login Page:** User authentication interface
+<img width="1791" height="830" alt="c6" src="https://github.com/user-attachments/assets/089cefa4-9520-49d2-9101-4f2f46488896" />
+
 - **Register Page:** New user registration form
+<img width="1801" height="873" alt="c7" src="https://github.com/user-attachments/assets/5fa3f863-ff66-4f10-bb55-f21435a9cf6f" />
+
 - **Dashboard:** Overview with charts and recent transactions
+<img width="1891" height="887" alt="c1" src="https://github.com/user-attachments/assets/e99e909a-612e-4c17-ab72-21ee49e9d318" />
+<img width="1902" height="900" alt="c2" src="https://github.com/user-attachments/assets/04fb1d2a-37d4-4721-a5ef-3254a988cb65" />
+
+
 - **History Page:** Complete expense history with search and filters
-- **Dark Mode:** Application in dark theme
+<img width="1902" height="900" alt="c4" src="https://github.com/user-attachments/assets/cdf00f50-fdfb-4256-bf09-3a2cfbab1752" />
+<img width="1907" height="902" alt="c5" src="https://github.com/user-attachments/assets/4b419b98-7c46-4573-9dee-2467451f5573" />
+
+
