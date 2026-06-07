@@ -129,24 +129,24 @@ export function CategorySpendingChart({ data, total }) {
   }
 
   return (
-    <div className="w-full h-[280px] flex flex-col sm:flex-row items-center justify-center">
-      <div className="w-full sm:w-1/2 h-[200px] sm:h-full relative">
+    <div className="w-full min-h-[300px] flex flex-col sm:flex-row items-center justify-center">
+      <div className="w-full sm:w-1/2 h-[320px] sm:h-[320px] relative">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={chartData}
               cx="50%"
               cy="50%"
-              innerRadius={60}
-              outerRadius={80}
+              innerRadius={70}
+              outerRadius={100}
               paddingAngle={5}
               dataKey="value"
               stroke="none"
             >
               {chartData.map((entry, index) => (
-                <Cell 
-                  key={`cell-${index}`} 
-                  fill={COLORS[entry.name] || DEFAULT_PIE_COLORS[index % DEFAULT_PIE_COLORS.length]} 
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[entry.name] || DEFAULT_PIE_COLORS[index % DEFAULT_PIE_COLORS.length]}
                 />
               ))}
             </Pie>
@@ -155,29 +155,29 @@ export function CategorySpendingChart({ data, total }) {
         </ResponsiveContainer>
         {/* Centered Total */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          <p className="text-lg font-bold text-gray-900 dark:text-white">
+          <p className="text-base sm:text-xl font-bold text-gray-900 dark:text-white">
             ₹{total?.toLocaleString('en-IN')}
           </p>
-          <p className="text-[10px] text-gray-500 dark:text-dark-muted">Total</p>
+          <p className="text-[10px] sm:text-xs text-gray-500 dark:text-dark-muted">Total</p>
         </div>
       </div>
 
       {/* Custom Legend */}
-      <div className="w-full sm:w-1/2 flex flex-col gap-3 px-4 mt-4 sm:mt-0">
+      <div className="w-full sm:w-1/2 flex flex-col gap-2 sm:gap-3 px-2 sm:px-4 mt-3 sm:mt-0">
         {chartData.map((entry, index) => (
-          <div key={entry.name} className="flex items-center justify-between text-[11px]">
+          <div key={entry.name} className="flex items-center justify-between text-[10px] sm:text-[11px]">
             <div className="flex items-center space-x-2">
-              <span 
-                className="w-2 h-2 rounded-full shrink-0" 
+              <span
+                className="w-2 h-2 rounded-full shrink-0"
                 style={{ backgroundColor: COLORS[entry.name] || DEFAULT_PIE_COLORS[index % DEFAULT_PIE_COLORS.length] }}
               />
               <span className="text-gray-700 dark:text-white font-medium">{entry.name}</span>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 sm:space-x-3">
               <span className="text-gray-900 dark:text-white font-bold">
                 ₹{entry.value.toLocaleString('en-IN')}
               </span>
-              <span className="text-gray-500 dark:text-dark-muted w-8 text-right">
+              <span className="text-gray-500 dark:text-dark-muted w-6 sm:w-8 text-right">
                 ({Math.round((entry.value / total) * 100)}%)
               </span>
             </div>

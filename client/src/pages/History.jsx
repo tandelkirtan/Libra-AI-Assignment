@@ -13,8 +13,6 @@ export default function History() {
   // Filters
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
 
   // Pagination
   const [pagination, setPagination] = useState({
@@ -36,8 +34,6 @@ export default function History() {
       const params = { page, limit: 10 };
       if (search.trim()) params.search = search.trim();
       if (category) params.category = category;
-      if (startDate) params.startDate = startDate;
-      if (endDate) params.endDate = endDate;
 
       const res = await api.get('/expenses', { params });
       setExpenses(res.data.expenses);
@@ -57,7 +53,7 @@ export default function History() {
     }, 250);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [search, category, startDate, endDate]);
+  }, [search, category]);
 
   const handleEditClick = (expense) => {
     setEditingExpense(expense);
@@ -83,12 +79,10 @@ export default function History() {
   const clearFilters = () => {
     setSearch('');
     setCategory('');
-    setStartDate('');
-    setEndDate('');
     setPagination({ currentPage: 1, totalPages: 1, totalItems: 0, itemsPerPage: 10 });
   };
 
-  const hasActiveFilters = search || category || startDate || endDate;
+  const hasActiveFilters = search || category;
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= pagination.totalPages) {
@@ -126,9 +120,9 @@ export default function History() {
 
       {/* Filters Panel */}
       <div className="bg-white dark:bg-dark-card p-6 rounded-2xl border border-gray-100 dark:border-dark-border shadow-sm">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Search */}
-          <div className="lg:col-span-2 relative">
+          <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 dark:text-dark-muted" />
             <input
               type="text"
@@ -154,22 +148,6 @@ export default function History() {
             <option value="Entertainment">Entertainment</option>
             <option value="Other">Other</option>
           </select>
-
-          {/* Date Start */}
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            className="w-full px-4 py-2 bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-900 dark:text-white focus:outline-none focus:border-brand-purple transition-colors"
-          />
-
-          {/* Date End */}
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            className="w-full px-4 py-2 bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border rounded-xl text-sm text-gray-900 dark:text-white focus:outline-none focus:border-brand-purple transition-colors"
-          />
         </div>
 
         {hasActiveFilters && (
