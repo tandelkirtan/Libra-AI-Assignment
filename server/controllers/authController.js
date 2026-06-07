@@ -19,6 +19,7 @@ const register = async (req, res) => {
     // Create new user
     const user = new User({
       name,
+      username: normalizedEmail, // Use email as username to guarantee uniqueness for the DB index
       email: normalizedEmail,
       password
     });
