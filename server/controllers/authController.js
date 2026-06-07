@@ -8,8 +8,10 @@ const register = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // Check if email already exists
-    const userExists = await User.findOne({ email });
+    // Check if email already exists (case-insensitive)
+    const normalizedEmail = email.toLowerCase();
+    const userExists = await User.findOne({ email: normalizedEmail });
+    
     if (userExists) {
       return res.status(400).json({ errors: [{ msg: 'Email is already registered' }] });
     }
@@ -17,7 +19,7 @@ const register = async (req, res) => {
     // Create new user
     const user = new User({
       name,
-      email,
+      email: normalizedEmail,
       password
     });
 
@@ -36,13 +38,20 @@ const register = async (req, res) => {
       process.env.JWT_SECRET || 'secretkey',
       { expiresIn: '24h' },
       (err, token) => {
-        if (err) throw err;
+        if (err) {
+          console.error('JWT Sign Error:', err);
+          return res.status(500).json({ message: 'Error generating token' });
+        }
         res.json({ token, user: { id: user.id, name: user.name, email: user.email } });
       }
     );
   } catch (err) {
-    console.error('Registration Error:', err);
-    res.status(500).json({ message: 'Server error during registration' });
+    console.error('Registration Error Details:', err);
+    // Send back specific error message if available
+    res.status(500).json({ 
+      message: 'Server error during registration',
+      error: err.message 
+    });
   }
 };
 
