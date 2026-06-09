@@ -61,7 +61,7 @@ export default function Login() {
             </div>
           </div>
           <h2 className="mt-4 text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-            Expense Reacker App
+            Let's Login
           </h2>
           <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted">
             Sign in to track your expenses efficiently
